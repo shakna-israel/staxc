@@ -2,7 +2,7 @@ CC=gcc
 FLAGS=-std=gnu99
 LIBRARIES=-lCello
 OUTPUT=StaC
-FILES=src/StaC.c
+FILES=src/StaC.c src/test.c
 
 deps:
 	git clone https://github.com/orangeduck/Cello.git && cd Cello && make

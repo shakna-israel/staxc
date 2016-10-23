@@ -3,7 +3,7 @@ StaX.c
 
 This is a C implementation of [StaX](https://github.com/shakna-israel/stax), a bytecode interpreter that resembles a Turing Tarpit.
 
-Some extensions may be in use, check the [Language](#Language) section.
+Some extensions may be in use, check the [Language](#language) section.
 
 ---
 

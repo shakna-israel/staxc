@@ -1,0 +1,4 @@
+main_test:
+  script:
+    - make all
+    - ./StaC

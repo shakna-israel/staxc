@@ -1,9 +1,10 @@
 #include "Cello.h"
+#include "test.h"
 
 void stax_push(var stax_Stack, var inti)
 // Add a value to a given stack
 {
-  push(stax_Stack, inti);
+  push_at(stax_Stack, copy(inti), $I(0));
 }
 
 void stax_drop(var stax_Stack)
@@ -42,12 +43,37 @@ void stax_dup(var stax_Stack)
 
   if(long_enough == true)
   {
-    var x = get(stax_Stack, $I(0));
+    var x = copy(get(stax_Stack, $I(0)));
     push(stax_Stack, x);
   }
 }
 
-//swap
+void stax_swap(var stax_Stack)
+// Swap the top two values of the given stack
+{
+  bool long_enough = true;
+
+  try
+  {
+    get(stax_Stack, $I(0));
+    get(stax_Stack, $I(1));
+  }
+  catch (e in IndexOutOfBoundsError)
+  {
+    long_enough = false;
+  }
+
+  if(long_enough == true)
+  {
+    var x = copy(get(stax_Stack, $I(0)));
+    var x2 = copy(get(stax_Stack, $I(1)));
+    stax_drop(stax_Stack);
+    stax_drop(stax_Stack);
+    push(stax_Stack, x);
+    push(stax_Stack, x2);
+  }
+}
+
 //rev
 //out
 //new
@@ -63,6 +89,17 @@ void stax_dup(var stax_Stack)
 // eval from file
 
 // test function
+int test()
+{
+  var stax_Stack = new(Array, Int);
+  stax_push(stax_Stack, $I(1));
+  if(test_assert(get(stax_Stack, $I(0)), $I(1)) != 0)
+  {
+    return 1;
+  }
+
+  return 0;
+}
 
 int main(int argc, char** argv)
 {
@@ -70,14 +107,6 @@ int main(int argc, char** argv)
   // Stack of Stacks
 
   var stax_Stack = new(Array, Int);
-  show(stax_Stack);
-  stax_push(stax_Stack, $I(10));
-  show(stax_Stack);
-  stax_drop(stax_Stack);
-  stax_drop(stax_Stack);
-  stax_dup(stax_Stack);
-  stax_push(stax_Stack, $I(10));
-  stax_dup(stax_Stack);
-  show(stax_Stack);
-  return 0;
+  
+  return test();
 }
